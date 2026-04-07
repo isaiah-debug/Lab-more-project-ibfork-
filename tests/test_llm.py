@@ -1,7 +1,7 @@
 """
 test_llm.py - Simple doctest for LLM
 
->>> from llm import LLM
+>>> from docsum_pkg.llm import LLM
 >>> llm = LLM()
 >>> llm.chat("Say hello")
 'Hello from LLM'
