@@ -1,5 +1,6 @@
-import pytest
-from docsum_pkg import summarize_text, LLM, Chat, repl
+from docsum_pkg.docsum import summarize_text
+from docsum_pkg.llm import LLM
+from docsum_pkg.chat import Chat, repl
 
 def test_summarize_text():
     """Test the summarization function with mock LLM output."""
