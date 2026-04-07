@@ -1,28 +1,45 @@
-name: Integration Tests
+name: Python CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  integration:
+  test:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.14]
+
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.14
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+    - name: Install build tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
 
-      - name: Run integration test
-        run: |
-          python -m pip install .
-          chat <<'EOF'
-          I am bob.
-          What is my name?
-          EOF
+    - name: Build and install package
+      run: |
+        python -m build
+        pip install --force-reinstall dist/cmc_csci40_mia-0.1.0-py3-none-any.whl
+
+    - name: Run doctests
+      run: |
+        python -m pytest --doctest-modules
+
+    - name: Run integration tests
+      run: |
+        python -m pytest tests/test_integration.py
+
+    - name: Run chat REPL test
+      run: |
+        chat <<< "Hello\nGoodbye"  # Example of testing the console script
