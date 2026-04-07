@@ -15,3 +15,11 @@ Install via pip:
 
 ```bash
 pip install cmc-csci40-mia
+
+**Version management**  
+   - Every time you update your package, increment the version in `pyproject.toml` (e.g., `0.1.1`, `0.2.0`, etc.).  
+   - Rebuild and upload the new version:  
+
+```bash
+python -m build
+twine upload dist/*
