@@ -1,5 +1,8 @@
+from .llm import LLM
+from .docsum import summarize_text
+
 """
-chat.py - Simple chat interface with doctests
+chat.py - Simple chat interface
 
 Doctests for repl():
 >>> import builtins
@@ -11,8 +14,7 @@ Doctests for repl():
 ...         return response
 ...     except IndexError:
 ...         raise KeyboardInterrupt
->>> builtins.input = monkey_input
->>> repl()  # doctest: +ELLIPSIS
+>>> repl(input_func=monkey_input)  # doctest: +ELLIPSIS
 chat> Hello
 Hello! 👋 How can I assist you today?
 chat> How are you?
@@ -34,19 +36,20 @@ class Chat:
         else:
             return f"You said: {message}"
 
-def repl():
-    """Run a read-eval-print loop for the Chat class."""
-    import builtins  # allow doctests to monkey patch input
+def repl(input_func=input):
+    """Run a read-eval-print loop for the Chat class.
+    Accepts a custom input function to allow testing.
+    """
     chat = Chat()
     try:
         while True:
-            user_input = input('chat> ')
+            user_input = input_func('chat> ')
             response = chat.send_message(user_input)
             print(response)
     except KeyboardInterrupt:
-        # This line now gets executed in doctests, so coverage hits 100%
+        # Ensure this line executes for coverage
         print()
 
-# only run REPL when this file is executed directly
+# Only run REPL when this file is executed directly
 if __name__ == '__main__':
-    repl() # pragma: no cover
+    repl()

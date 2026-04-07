@@ -1,24 +1,16 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cmc-csci005-miaurosevic"
+name = "cmc-csci40-mia"                 # your PyPI package name
 version = "0.1.0"
-description = "A simple LLM-based chat and text summarization tool."
+description = "Simple text summarization using an LLM"
 readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Mia U", email = "your-email@example.com"}]
 requires-python = ">=3.10"
-license = "MIT"
-authors = [{ name = "Mia Urosevic", email = "your-email@example.com" }]
-keywords = ["chat", "LLM", "text summarization"]
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent"
-]
+dependencies = []
 
-# Packages: tells setuptools which folders to include
-packages = ["docsum_pkg"]
-
-[project.scripts]
-# Command line script: `chat` command runs repl() in chat.py
-chat = "docsum_pkg.chat:repl"
+[tool.setuptools.packages.find]
+where = ["docsum_pkg"]

@@ -1,3 +1,24 @@
+# Environment files
 .env
-venv
-__pycache__
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# IDE/Editor files (optional)
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
