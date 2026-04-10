@@ -13,7 +13,7 @@ requires-python = ">=3.10"
 dependencies = []
 
 [tool.setuptools.packages.find]
-where = ["docsum_pkg"]
+where = ["docsum_src"]
 
 [project.scripts]
-chat = "docsum_pkg.chat:repl"
+chat = "docsum_src.chat:repl"
