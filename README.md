@@ -1,6 +1,6 @@
 # Local Project Chat Agent
 
-A command-line AI agent for inspecting local software projects with safe built-in tools like `ls`, `cat`, `grep`, `calculate`, and `compact`. It supports both manual slash commands and automatic tool use for common project questions.
+An AI-powered command-line agent for exploring and analyzing local codebases using natural language and LLM-based tool calling. It provides safe access to files through built-in tools like `ls`, `cat`, `grep`, `calculate`, and `compact`.
 
 ![doctests](https://img.shields.io/github/actions/workflow/status/MiaUrosevic/Lab-more-project/doctests.yml?label=doctests)
 ![integration-tests](https://img.shields.io/github/actions/workflow/status/MiaUrosevic/Lab-more-project/integration-tests.yml?label=integration-tests)
@@ -8,19 +8,25 @@ A command-line AI agent for inspecting local software projects with safe built-i
 ![coverage](https://img.shields.io/badge/coverage-91%25-brightgreen)
 ![pypi](https://img.shields.io/pypi/v/cmc-csci40-mia)
 
+---
+
 ## Demo
 
 ![demo](demo.gif)
 
+---
+
 ## Features
 
-- Safe local file inspection with path validation
-- Manual slash commands such as `/ls`, `/cat`, `/grep`, `/calculate`, and `/compact`
-- Automatic tool routing for common file and arithmetic questions
+- Safe local file inspection with path validation (prevents absolute paths and traversal attacks)
+- Manual slash commands (`/ls`, `/cat`, `/grep`, `/calculate`, `/compact`)
+- Automatic **LLM-based tool calling**
 - One-shot CLI usage
-- `--debug` support for showing tool calls
-- `--provider` support
-- Doctests, integration tests, flake8, and coverage reporting
+- `--debug` flag to display tool calls
+- `--provider` flag for model selection
+- Full testing suite (doctests, integration tests, flake8, coverage)
+
+---
 
 ## Installation
 
@@ -43,6 +49,7 @@ This example is good because it shows the agent answering a high-level question 
 ```bash
 $ cd test_projects/webscraping_project
 $ python ../../chat.py "what is this project about?"
+The project is designed to scrape product data from eBay listings, including titles, prices, and links.
 ```
 
 ## Example: Markdown Compiler
@@ -51,6 +58,9 @@ This example is good because it shows the agent inspecting implementation detail
 ```bash
 $ cd test_projects/markdown_compiler
 $ python ../../chat.py "find def in *.py"
+def compile_markdown(file_path):
+def parse_headers(text):
+def render_html(content):
 ```
 
 ## Example: Mia.Urosevic.github.io
@@ -59,4 +69,5 @@ This example is good because it shows the agent reading and summarizing files fr
 ```bash
 $ cd test_projects/Mia.Urosevic.github.io
 $ python ../../chat.py "show me README.md"
+This project is a personal website built using HTML, CSS, and JavaScript.
 ```
