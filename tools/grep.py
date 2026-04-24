@@ -3,9 +3,7 @@ The grep tool searches matching project files for lines that match a regex.
 """
 
 import glob
-import os
 import re
-import tempfile
 from chat import is_path_safe
 
 
@@ -13,6 +11,7 @@ def run_grep(pattern, path_glob):
     """
     Search matching files for lines that match a regex.
 
+    >>> import os, tempfile
     >>> with tempfile.TemporaryDirectory() as tmp:
     ...     f1 = os.path.join(tmp, "a.txt")
     ...     f2 = os.path.join(tmp, "b.txt")
@@ -24,6 +23,7 @@ def run_grep(pattern, path_glob):
     >>> run_grep("hello", "..")
     'Error: unsafe path'
 
+    >>> import os, tempfile
     >>> with tempfile.TemporaryDirectory() as tmp:
     ...     f = os.path.join(tmp, "a.txt")
     ...     _ = open(f, "w", encoding="utf-8").write("nothing here")

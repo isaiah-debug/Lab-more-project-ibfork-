@@ -24,4 +24,3 @@ def run_calculate(expression):
         return str(result)
     except Exception as e:
         return f"Error: {e}"
-    

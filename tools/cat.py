@@ -2,8 +2,6 @@
 The cat tool reads a text file in the current project and returns its contents.
 """
 
-import os
-import tempfile
 from chat import is_path_safe
 
 
@@ -11,6 +9,7 @@ def run_cat(path):
     """
     Read and return the contents of a text file.
 
+    >>> import os, tempfile
     >>> with tempfile.TemporaryDirectory() as tmp:
     ...     path = os.path.join(tmp, "hello.txt")
     ...     _ = open(path, "w", encoding="utf-8").write("hello\\nworld")
