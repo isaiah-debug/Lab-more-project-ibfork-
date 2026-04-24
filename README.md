@@ -6,7 +6,7 @@ An AI-powered command-line agent for exploring and analyzing local codebases usi
 ![integration-tests](https://img.shields.io/github/actions/workflow/status/MiaUrosevic/Lab-more-project/integration-tests.yml?label=integration-tests)
 ![flake8](https://img.shields.io/github/actions/workflow/status/MiaUrosevic/Lab-more-project/flake8.yml?label=flake8)
 ![coverage](https://img.shields.io/badge/coverage-91%25-brightgreen)
-![pypi](https://img.shields.io/pypi/v/cmc-csci40-mia)
+![pypi](https://img.shields.io/pypi/v/lab-more-project-chat)
 
 ---
 

@@ -4,7 +4,32 @@ The grep tool searches matching project files for lines that match a regex.
 
 import glob
 import re
+
 from chat import is_path_safe
+from tools.cat import read_text_file
+
+
+TOOL_SPEC = {
+    "type": "function",
+    "function": {
+        "name": "grep",
+        "description": "Search matching relative files for lines that match a regular expression.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "pattern": {
+                    "type": "string",
+                    "description": "The regular expression to search for.",
+                },
+                "path_glob": {
+                    "type": "string",
+                    "description": "A relative path or glob pattern describing files to search.",
+                },
+            },
+            "required": ["pattern", "path_glob"],
+        },
+    },
+}
 
 
 def run_grep(pattern, path_glob):
@@ -36,14 +61,14 @@ def run_grep(pattern, path_glob):
     if not is_path_safe(path_glob):
         return "Error: unsafe path"
 
-    out = []
+    output = []
     for filename in sorted(glob.glob(path_glob)):
         try:
-            with open(filename, "r", encoding="utf-8") as f:
-                for line in f:
-                    if re.search(pattern, line):
-                        out.append(line.rstrip("\n"))
+            file_contents = read_text_file(filename)
+            for line in file_contents.splitlines():
+                if re.search(pattern, line):
+                    output.append(line)
         except Exception:
             continue
 
-    return "\n".join(out)
+    return "\n".join(output)

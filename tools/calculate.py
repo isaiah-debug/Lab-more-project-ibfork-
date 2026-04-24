@@ -1,26 +1,46 @@
 """
-The calculate tool evaluates simple arithmetic expressions.
+The calculate tool evaluates simple arithmetic expressions using the Groq tutorial shape.
 """
+
+import json
+
+
+TOOL_SPEC = {
+    "type": "function",
+    "function": {
+        "name": "calculate",
+        "description": "Evaluate a mathematical expression",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "expression": {
+                    "type": "string",
+                    "description": "The mathematical expression to evaluate",
+                }
+            },
+            "required": ["expression"],
+        },
+    },
+}
 
 
 def run_calculate(expression):
     """
-    Evaluate a simple arithmetic expression and return the result as text.
+    Evaluate a simple arithmetic expression and return a JSON result string.
 
     >>> run_calculate("2 + 2")
-    '4'
+    '{"result": 4}'
     >>> run_calculate("10 - 3")
-    '7'
+    '{"result": 7}'
     >>> run_calculate("2 * (3 + 4)")
-    '14'
+    '{"result": 14}'
     >>> run_calculate("5 / 2")
-    '2.5'
-    >>> run_calculate("hello").startswith("Error:")
-    True
+    '{"result": 2.5}'
+    >>> run_calculate("hello")
+    '{"error": "name \\'hello\\' is not defined"}'
     """
     try:
-        allowed_globals = {"__builtins__": {}}
-        result = eval(expression, allowed_globals, {})
-        return str(result)
-    except Exception as e:
-        return f"Error: {e}"
+        result = eval(expression, {"__builtins__": {}}, {})
+        return json.dumps({"result": result})
+    except Exception as error:
+        return json.dumps({"error": str(error)})
