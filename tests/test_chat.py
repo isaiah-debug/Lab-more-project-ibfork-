@@ -128,7 +128,7 @@ def test_manual_ls_returns_string():
     """Allow ls to run without an explicit argument."""
     chat = Chat()
     result = chat.run_manual_command("/ls")
-    assert isinstance(result, str)
+    assert "chat.py" in result
 
 
 def test_manual_cat_wrong_args():

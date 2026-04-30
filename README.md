@@ -1,12 +1,10 @@
 # Local Project Chat Agent
 
-An AI-powered command-line agent for exploring and analyzing local codebases using natural language and LLM-based tool calling. It provides safe access to files through built-in tools like `ls`, `cat`, `grep`, `calculate`, and `compact`.
+This command-line chat agent explores local codebases with natural language and tool calls. It provides safe access to files through built-in tools like `ls`, `cat`, `grep`, `calculate`, and `compact`.
 
-![doctests](https://img.shields.io/github/actions/workflow/status/MiaUrosevic/Lab-more-project/doctests.yml?label=doctests)
-![integration-tests](https://img.shields.io/github/actions/workflow/status/MiaUrosevic/Lab-more-project/integration-tests.yml?label=integration-tests)
-![flake8](https://img.shields.io/github/actions/workflow/status/MiaUrosevic/Lab-more-project/flake8.yml?label=flake8)
-![coverage](https://img.shields.io/badge/coverage-91%25-brightgreen)
-[![PyPI version](https://badge.fury.io/py/lab-more-project-chat.svg)](https://pypi.org/project/lab-more-project-chat/)
+![doctests](https://img.shields.io/github/actions/workflow/status/isaiah-debug/Lab-more-project-ibfork-/doctests.yml?label=doctests)
+![integration-tests](https://img.shields.io/github/actions/workflow/status/isaiah-debug/Lab-more-project-ibfork-/integration-tests.yml?label=integration-tests)
+![flake8](https://img.shields.io/github/actions/workflow/status/isaiah-debug/Lab-more-project-ibfork-/flake8.yml?label=flake8)
 
 ---
 
@@ -30,21 +28,35 @@ An AI-powered command-line agent for exploring and analyzing local codebases usi
 
 ## Installation
 
+Install the project dependencies before running the chat script:
+
 ```bash
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 ## Usage
 
+Run the interactive chat or pass a one-shot message from the terminal:
+
 ```bash
-python chat.py
-python chat.py "what is 2 + 2?"
-python chat.py --debug "what files are in the .github folder?"
-python chat.py --provider groq "show me README.md"
+$ python chat.py
+chat> what is 2 + 2?
+4
+
+$ python chat.py "what is 2 + 2?"
+4
+
+$ python chat.py --debug "what files are in the .github folder?"
+[tool] /ls .github
+The only file in that folder is workflows.
+
+$ python chat.py --provider groq "show me README.md"
+# Local Project Chat Agent
 ```
 
 ## Example: Webscraping Project
-This example is good because it shows the agent answering a high-level question about a real scraping project.
+
+The agent can answer high-level questions about a real scraping project:
 
 ```bash
 $ cd test_projects/webscraping_project
@@ -53,7 +65,8 @@ The project is designed to scrape product data from eBay listings, including tit
 ```
 
 ## Example: Markdown Compiler
-This example is good because it shows the agent inspecting implementation details across source files.
+
+The agent can inspect implementation details across source files:
 
 ```bash
 $ cd test_projects/markdown_compiler
@@ -64,7 +77,8 @@ def render_html(content):
 ```
 
 ## Example: Mia.Urosevic.github.io
-This example is good because it shows the agent reading and summarizing files from a real webpage project.
+
+The agent can read and summarize files from a webpage project:
 
 ```bash
 $ cd test_projects/Mia.Urosevic.github.io

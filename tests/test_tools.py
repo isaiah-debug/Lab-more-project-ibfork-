@@ -33,7 +33,7 @@ def test_ls_unsafe():
 def test_ls_normal():
     """Return a string listing for normal ls calls."""
     result = run_ls(".")
-    assert isinstance(result, str)
+    assert "chat.py" in result.splitlines()
 
 
 def test_cat_unsafe():
