@@ -176,6 +176,16 @@ def test_auto_choose_cat():
     assert json.loads(tool_call["function"]["arguments"]) == {"path": "README.md"}
 
 
+def test_auto_choose_readme_question():
+    """Route README questions to the cat tool."""
+    chat = Chat()
+    tool_call = chat._auto_choose_tool(
+        "what does the README say this project is about?"
+    )
+    assert tool_call["function"]["name"] == "cat"
+    assert json.loads(tool_call["function"]["arguments"]) == {"path": "README.md"}
+
+
 def test_auto_choose_grep():
     """Route search prompts to the grep tool."""
     chat = Chat()
@@ -212,6 +222,13 @@ def test_send_message_unknown():
     chat = Chat()
     result = chat.send_message("tell me something interesting")
     assert "I could not automatically determine" in result
+
+
+def test_send_message_readme_question():
+    """Answer README questions by reading README.md."""
+    chat = Chat()
+    result = chat.send_message("what does the README say this project is about?")
+    assert "# Local Project Chat Agent" in result
 
 
 def test_send_message_ls_empty_branch():

@@ -384,6 +384,9 @@ class Chat:
         'ls'
         >>> chat._auto_choose_tool("show me README.md")["function"]["name"]
         'cat'
+        >>> tool_call = chat._auto_choose_tool("what does the README say this project is about?")
+        >>> tool_call["function"]["name"]
+        'cat'
         >>> chat._auto_choose_tool("find def in tools/*.py")["function"]["name"]
         'grep'
         >>> chat._auto_choose_tool("what is 2 + 2?")["function"]["name"]
@@ -402,6 +405,9 @@ class Chat:
         if lowered.startswith("show me ") or lowered.startswith("open "):
             filename = text.split(maxsplit=2)[-1].strip()
             return self._make_tool_call("cat", {"path": filename})
+
+        if "readme" in lowered:
+            return self._make_tool_call("cat", {"path": "README.md"})
 
         if lowered.startswith("find ") and " in " in text:
             body = text[5:]
